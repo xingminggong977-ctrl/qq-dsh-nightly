@@ -1,0 +1,20 @@
+[Unit]
+Description=dsh-qq 周度深度挖矿：回溯 7 天、digest 上限 400 行
+Documentation=file:///opt/dsh-qq-agent/nightly/README.md
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/dsh-qq-agent/nightly
+# --weekly 同时改两件事：回溯 7 天，且行数上限放到 400（契约的硬上限表）。
+ExecStart=/usr/local/bin/node bin/nightly-digest.mjs --weekly
+StandardOutput=append:/var/log/dsh-qq-nightly.log
+StandardError=append:/var/log/dsh-qq-nightly.log
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+# 周度读的是同一批审计分片（只是窗口更宽），写的是同一个输出目录。
+ReadWritePaths=/var/lib/dsh-qq-agent/nightly
+ReadOnlyPaths=/opt/dsh-qq-agent /var/log

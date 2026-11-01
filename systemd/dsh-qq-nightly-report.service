@@ -1,0 +1,23 @@
+[Unit]
+Description=dsh-qq 晨报：把昨晚的 digest 与提案压成一条 QQ 私聊（≤600 字）
+Documentation=file:///opt/dsh-qq-agent/nightly/README.md
+# 桥接不在时不排队等它：这条任务自己会记日志并退出，下一次是明天。
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/dsh-qq-agent/nightly
+# NODE_TOKEN / BRIDGE_URL / OWNER_QQ 从这里来；文件不存在时用 `-` 前缀让 unit 照常起，
+# 缺 token 的情况由脚本自己报一行可读原因（退出码 2），而不是让 systemd 先失败一次。
+EnvironmentFile=-/etc/dsh-qq-nightly/env
+ExecStart=/usr/local/bin/node bin/morning-report.mjs
+StandardOutput=append:/var/log/dsh-qq-nightly.log
+StandardError=append:/var/log/dsh-qq-nightly.log
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+# 只读 digest/stats 与提案目录，写到日志文件由 StandardOutput 负责。
+ReadOnlyPaths=/opt/dsh-qq-agent /var/lib/dsh-qq-agent/nightly /var/log

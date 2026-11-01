@@ -1,0 +1,10 @@
+2026-05-13T16:05:12+00:00 bridge[812]: {"ts":"2026-05-13T16:05:12.000Z","level":"info","msg":"result recorded","taskId":"t-1001","textChars":2}
+2026-05-13T23:00:00+00:00 bridge[812]: {"ts":"2026-05-13T23:00:00.000Z","level":"warn","msg":"qq reply failed after retries","taskId":"t-1009","reason":"retrying 2/3"}
+2026-05-14T05:57:22+00:00 bridge[812]: {"ts":"2026-05-14T05:57:22.000Z","level":"warn","msg":"voice transcription failed","taskId":"t-1011","reason":"PermissionError: [Errno 13] Permission denied: '/home/dshqq/.cache'"}
+2026-05-14T06:01:00+00:00 bridge[812]: {"ts":"2026-05-14T06:01:00.000Z","level":"warn","msg":"task finished","taskId":"t-1012","delivered":false}
+2026-05-14T06:01:01+00:00 napcat[640]: retcode 1200 send_private_msg failed for 664671782
+2026-05-14T06:02:30+00:00 node[901]: {"ts":"2026-05-14T06:02:30.000Z","level":"info","msg":"proactive ask queued","taskId":"p-2210"}
+2026-05-14T06:03:00+00:00 node[901]: qq-node: proactive turn p-2210 declined
+2026-05-14T06:04:10+00:00 bridge[812]: {"ts":"2026-05-14T06:04:10.000Z","level":"info","msg":"result recorded","taskId":"t-1018","textChars":0}
+2026-05-14T06:05:00+00:00 node[901]: qq-node: turn finished tier=deep
+2026-05-14T15:58:00+00:00 bridge[812]: {"ts":"2026-05-14T15:58:00.000Z","level":"info","msg":"poll ok"}

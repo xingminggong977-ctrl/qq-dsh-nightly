@@ -1,0 +1,14 @@
+[Unit]
+Description=每周日 03:00 生成 dsh-qq 周度素材（服务器本地时间）
+
+[Timer]
+# 周日 03:00 与每晚那次同一时刻：先跑周度（7 天窗口覆盖前一天的所有事实），
+# 再跑日度。两个 unit 都是 oneshot，撞在一起也只是一前一后，互不覆盖：
+# 周度写的是同名的 digest-YYYY-MM-DD.md，但内容是 7 天窗口 —— 见 README「周度覆盖」。
+OnCalendar=Sun *-*-* 03:00:00
+Persistent=true
+AccuracySec=1min
+Unit=dsh-qq-nightly-weekly.service
+
+[Install]
+WantedBy=timers.target

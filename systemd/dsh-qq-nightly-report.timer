@@ -1,0 +1,12 @@
+[Unit]
+Description=每天 08:30 发 dsh-qq 晨报私聊（服务器本地时间）
+
+[Timer]
+# 08:30 是契约里的固定时刻：主人起床看手机，而 03:10 的复盘早就落完了。
+OnCalendar=*-*-* 08:30:00
+# 漏掉的那条补发没有意义（晚一晚的事实不如当天的新鲜），所以不开 Persistent。
+AccuracySec=1min
+Unit=dsh-qq-nightly-report.service
+
+[Install]
+WantedBy=timers.target

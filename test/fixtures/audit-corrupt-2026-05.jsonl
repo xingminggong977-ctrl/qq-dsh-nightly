@@ -1,0 +1,5 @@
+{"at":"2026-05-14T02:10:00.000Z","kind":"private_reply","ok":true,"target":"111222333","chars":2,"text":"好的","tier":"fast","taskId":"t-2001"}
+{"at":"2026-05-14T02:11:00.000Z","kind":"private_reply","ok":true,"target":"111222333","chars":3
+{"at":"2026-05-14T02:12:00.000Z","kind":"private_reply","ok":true,"target":"111222333","chars":1,"text":"嗯","tier":"fast","taskId":"t-2002"}
+这不是 JSON，但一定是日志里会出现的行
+{"at":"2026-05-14T02:13:00.000Z","kind":"private_reply","ok":true,"target":"111222333","chars":2,"text":"好","tier":"fast","taskId":"t-2003"}

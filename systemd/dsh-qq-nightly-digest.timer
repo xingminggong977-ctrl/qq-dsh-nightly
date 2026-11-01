@@ -1,0 +1,13 @@
+[Unit]
+Description=每天 03:00 生成 dsh-qq 夜班素材（服务器本地时间）
+
+[Timer]
+# 服务器本地时区（Asia/Shanghai）。改时区会让这个时刻整体平移，属于预期行为。
+OnCalendar=*-*-* 03:00:00
+# 机器夜里关机时补跑一次：漏掉的素材比迟到的素材更贵。
+Persistent=true
+AccuracySec=1min
+Unit=dsh-qq-nightly-digest.service
+
+[Install]
+WantedBy=timers.target

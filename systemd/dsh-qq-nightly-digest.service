@@ -1,0 +1,25 @@
+[Unit]
+Description=dsh-qq 夜班挖矿：生成 digest 与 stats（只 grep 与计数，零 token）
+Documentation=file:///opt/dsh-qq-agent/nightly/README.md
+# 审计文件按 UTC 月分片，写入方是 node-plugin；这里只读，不做任何依赖排序。
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/opt/dsh-qq-agent/nightly
+# 03:00 触发，而 node-plugin 的复盘轮次 03:10 就要读这份 digest，
+# 所以这里失败必须留痕而不是重试：重试也赶不上 03:10，只会两份素材打架。
+ExecStart=/usr/local/bin/node bin/nightly-digest.mjs
+# 部署时按 `command -v node` 改上面那一行（RUNBOOK S3 的 npmmirror 装法给的是
+# /usr/local/bin/node，发行版包给的是 /usr/local/bin/node）。
+StandardOutput=append:/var/log/dsh-qq-nightly.log
+StandardError=append:/var/log/dsh-qq-nightly.log
+
+# 只写 /var/lib/dsh-qq-agent/nightly，只读审计与 persona；收紧扣住这两点即可。
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+# 契约里 digest/stats 落在 /var/lib/dsh-qq-agent/nightly。
+ReadWritePaths=/var/lib/dsh-qq-agent/nightly
+ReadOnlyPaths=/opt/dsh-qq-agent /var/log

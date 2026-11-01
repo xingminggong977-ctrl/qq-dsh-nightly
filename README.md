@@ -1,4 +1,20 @@
-﻿# dsh-qq 夜班 · 零 token 那一半
+# qq-dsh-nightly
+
+**What happens while you sleep: a day of chat becomes a digest, and a digest becomes proposals.**
+
+It reads the day's sessions, compresses them into one digest per day, then asks the model for
+small, reviewable proposals ("this file has a bug", "this rule should exist"). Nothing is
+applied automatically — proposals land in a directory and a human decides.
+
+## In short
+
+- **You need:** Node 22+ and a DSH install to talk to.
+- **Try it:** `node --test "test/**/*.test.js"` — 44 tests, no network needed.
+- **Design rule:** the nightly pass proposes, it never edits. That is why it is safe to leave
+  it on a timer.
+
+---
+# dsh-qq 夜班 · 零 token 那一半
 
 `nightly/` 只做两件事：**读**审计流水与 journald 日志，**数**出昨晚发生了什么。
 一次模型都不调 —— 记忆的写入、提案的生成、复盘轮次都在 node-plugin 侧（03:10），
